@@ -6,40 +6,38 @@ function App() {
   const [puppies, setPuppies] = useState(puppyList);
   const [featPupId, setFeatPupId] = useState(null);
   const featuredPup = puppies.find((puppy) => puppy.id === featPupId);
-  console.log(featuredPup);
 
-  console.log(puppies);
   return (
     <>
-      <div>
+      <div className="mb-5">
+        <h1 className="text-primary">Puppies</h1>
+        <h5 className="pb-3">Click names to view details.</h5>
         {puppies.map((puppy) => {
           return (
-            <p
-              onClick={() => {
-                setFeatPupId(puppy.id);
-              }}
-              key={puppy.id}
-            >
-              {puppy.name}
-            </p>
+            <div>
+              <p
+                onClick={() => {
+                  setFeatPupId(puppy.id);
+                }}
+                key={puppy.id}
+              >
+                {puppy.name}
+              </p>
+            </div>
           );
         })}
-        {featPupId && (
-          <div>
-            <h2>{featuredPup.age}</h2>
-            <ul>
-              <li>
-                Age:
-                {featuredPup.age}
-              </li>
-              <li>
-                Email:
-                {featuredPup.email}
-              </li>
-            </ul>
-          </div>
-        )}
       </div>
+      {featPupId && (
+        <div>
+          <h2 className="text-primary">Featured Puppy:</h2>
+          <h5>{featuredPup.name}</h5>
+          <ul>
+            <li>Owner ID: {featuredPup.ownerId}</li>
+            <li>Age: {featuredPup.age} years</li>
+            <li>Email: {featuredPup.email}</li>
+          </ul>
+        </div>
+      )}
     </>
   );
 }
